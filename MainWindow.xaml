@@ -1,0 +1,113 @@
+﻿<Window x:Class="WpfBotMessages.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"       
+        xmlns:local="clr-namespace:WpfBotMessages"
+        mc:Ignorable="d"
+        Title="WindowWPF"
+        Height="650"
+        Width="800"
+        MinWidth="300">
+    <Grid ShowGridLines="True"
+          Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <GroupBox FontSize="20"
+                  Header="Входящие сообщения"
+                  Margin="5">
+            <ListBox x:Name="ListMessages"
+                 Grid.Row="0"
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch"
+                 Margin="5"
+                 BorderBrush="#FF8B8BF0"
+                 Background="#FFCBF5FD">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Blue
+                                " Margin="5"
+                                BorderThickness="2"
+                                Background="Azure">
+                            <StackPanel x:Name="myPanel"
+                                        Margin="10">
+                                <TextBlock x:Name="id"
+                                           Text="{Binding StringFormat=Id:  {0}, Path=Id}"
+                                           Margin="2"
+                                           FontSize="15"
+                                           Foreground="Chocolate"/>
+                                <TextBlock x:Name="fName"
+                                           Text="{Binding StringFormat=From:  {0}, Path=FName}"
+                                           Margin="2"
+                                           FontSize="15"
+                                           Foreground="Blue"
+                                           TextWrapping="WrapWithOverflow"/>
+                                <TextBlock x:Name="text"
+                                           Text="{Binding StringFormat=Message:  {0}, Path=Mess}"
+                                           Margin="2"
+                                           FontSize="20"
+                                           Foreground="Crimson"
+                                           TextAlignment="Right"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" 
+                  FontSize="20"
+                  Header="Напишите сообщение"
+                  MinHeight="350"
+                  HorizontalAlignment="Stretch" 
+                  Margin="5"
+                  VerticalAlignment="Stretch">
+            <StackPanel>
+                <TextBlock x:Name="sendMessage" 
+                           Text="{Binding ElementName=ListMessages, Path=SelectedItem.Id}"
+                           Visibility="Collapsed"
+                           Margin="5"/>
+                <TextBox x:Name="textMessage"
+                         FontSize="20"
+                         Margin="5"
+                         Background="#FFE2FAFF"/>
+                <Button x:Name="buttonSendMessage"
+                        FontSize="20"
+                        Content="Отправить"
+                        Margin="5"
+                        MinWidth="150"
+                        MaxWidth="200"
+                        HorizontalAlignment="Left"
+                        Cursor="Hand"
+                        Click="buttonSendMessage_Click"
+                        Background="#FFFDDCEE"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2"
+                  FontSize="20"
+                  Margin="5"
+                  Header="Сохранение в файл">
+            <StackPanel  Height="100" >
+                <Label x:Name="SaveLabel"
+                       FontSize="20"
+                       Foreground="Red"
+                       Content=""
+                       Visibility="Collapsed"></Label>
+                <Button x:Name="buttonSaveMessage"
+                        FontSize="20"
+                        Content="Сохранить"
+                        Margin="5" MinWidth="150"
+                        MaxWidth="200"
+                        HorizontalAlignment="Left"
+                        Cursor="Hand"
+                        Click="buttonSaveMessage_Click"
+                        Background="#FFFDDCEE"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
